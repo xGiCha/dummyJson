@@ -18,14 +18,14 @@ data class ProductEntity(
     val discountPercentage: Double? = null,
     val rating: Double? = null,
     val stock: Int? = null,
-    @TypeConverters(TagsConverter::class) val tags: List<String>? = null,
+    val tags: List<String>? = null,
     val brand: String? = null,
-    @TypeConverters(DimensionsConverter::class) val dimensions: DimensionsEntity? = null,
+    val dimensions: DimensionsEntity? = null,
     val reviews: List<ReviewEntity>? = null,
     val returnPolicy: String? = null,
     val minimumOrderQuantity: Int? = null,
     val thumbnail: String? = null,
-    @TypeConverters(ImagesConverter::class) val images: List<String>? = null
+    val images: List<String>? = null
 ) {
     data class DimensionsEntity(
         val width: Double? = null,

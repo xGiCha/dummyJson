@@ -27,7 +27,7 @@ class SplashViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             delay(3000)
-            silentLoginUseCase.isLoggedIn().collect{
+            silentLoginUseCase.isLoggedIn().collect {
                 if (it) {
                     events.emitAsync(SplashContract.Event.NavigateToHomeScreen)
                 } else {

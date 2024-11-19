@@ -64,7 +64,7 @@ private fun SplashScreenContent(
     ) {
 
         Image(
-            painter = painterResource(id = splashDrawable), // Replace with your actual drawable resource
+            painter = painterResource(id = splashDrawable),
             contentDescription = null,
         )
 

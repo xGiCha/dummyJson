@@ -17,11 +17,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import gr.android.dummyjson.ui.home.HomeScreen
+import gr.android.dummyjson.ui.login.LoginNavigation
+import gr.android.dummyjson.ui.login.LoginScreen
 import gr.android.dummyjson.ui.splash.SplashNavigation
 import gr.android.dummyjson.ui.splash.SplashScreen
 
 @Composable
-fun FakeStoreApp() {
+fun DummyJsonApp() {
     val navController = rememberNavController()
     DummyJsonNavHost(
         navController = navController
@@ -52,12 +55,52 @@ fun DummyJsonNavHost(
                     startDestination = Screen.SplashScreen.route.value,
                 ) {
                     navigateToSplashScreen(navController = navController)
+                    navigateToLoginScreen(navController = navController)
+                    navigateToHomeScreen(navController = navController)
                 }
             }
         }
     }
     )
 
+}
+
+private fun NavGraphBuilder.navigateToHomeScreen(
+    navController: NavHostController
+) {
+    composable(route = Screen.HomeScreen.route.value) {
+        HomeScreen(
+//            navigate = {
+//                when(it) {
+//                    is HomeNavigation.NavigateToDetails -> {
+//                        navController.navigate(Screen.ProductDetailsScreen.createRoute(it.productId.toString()))
+//                    }
+//
+//                    HomeNavigation.NavigateToLoginScreen -> {
+//                        navController.navigate(Screen.LoginScreen.route.value) {
+//                            popUpTo(0) { inclusive = true }
+//                        }
+//                    }
+//                }
+//            }
+        )
+    }
+}
+
+private fun NavGraphBuilder.navigateToLoginScreen(
+    navController: NavHostController
+) {
+    composable(route = Screen.LoginScreen.route.value) {
+        LoginScreen(
+            navigate = {
+                when(it){
+                    LoginNavigation.NavigateToHome -> {
+                        goHomeAndClearBackStack(navController)
+                    }
+                }
+            }
+        )
+    }
 }
 
 private fun NavGraphBuilder.navigateToSplashScreen(
