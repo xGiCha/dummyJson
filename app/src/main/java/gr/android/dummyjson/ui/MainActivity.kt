@@ -1,4 +1,4 @@
-package gr.android.dummyjson
+package gr.android.dummyjson.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
