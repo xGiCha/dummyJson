@@ -1,12 +1,17 @@
 package gr.android.dummyjson.data.network.services.interceptors
 import gr.android.dummyjson.data.network.models.login.RefreshTokenRequest
 import gr.android.dummyjson.data.local.SessionPreferences
-import gr.android.dummyjson.data.network.datasources.LoginDatasource
+import gr.android.dummyjson.data.network.models.login.RefreshTokenDTO
+import gr.android.dummyjson.data.network.services.LoginApi
+import gr.android.dummyjson.utils.Constants.BASE_URL
 import kotlinx.coroutines.flow.firstOrNull
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class TokenService @Inject constructor(
-    private val loginDatasource: LoginDatasource,
     private val sessionPreferences: SessionPreferences
 ) {
 
@@ -19,7 +24,7 @@ class TokenService @Inject constructor(
         }
 
         try {
-            val response = loginDatasource.refreshToken(RefreshTokenRequest(refreshToken))
+            val response = getNewToken(refreshToken)
             if (response.refreshToken.isNotEmpty()) {
                 // Save new tokens in session preferences
                 sessionPreferences.saveAccessToken(response.accessToken)
@@ -30,5 +35,22 @@ class TokenService @Inject constructor(
             // Handle any exception, like network error or invalid refresh token
         }
         return null
+    }
+
+    private suspend fun getNewToken(refreshToken: String?): RefreshTokenDTO {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        val okHttpClient = OkHttpClient
+            .Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(LoginApi::class.java)
+        return service.refreshToken(RefreshTokenRequest(refreshToken.orEmpty()))
     }
 }

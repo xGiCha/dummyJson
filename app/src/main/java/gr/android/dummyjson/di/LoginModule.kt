@@ -11,8 +11,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import gr.android.dummyjson.data.local.SessionPreferences
-import gr.android.dummyjson.data.network.datasources.LoginDatasource
-import gr.android.dummyjson.data.network.datasources.LoginDatasourceImpl
 import gr.android.dummyjson.data.network.services.LoginApi
 import gr.android.dummyjson.data.repositories.login.LoginRepositoryImpl
 import gr.android.dummyjson.domain.repository.LoginRepository
@@ -37,22 +35,12 @@ object LoginModule {
     @Provides
     @Singleton
     fun provideLoginRepository(
-        loginDatasource: LoginDatasource,
+        api: LoginApi,
         sessionPreferences: SessionPreferences
     ): LoginRepository {
         return LoginRepositoryImpl(
-            datasource = loginDatasource,
+            api = api,
             sessionPreferences = sessionPreferences
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideLoginDatasource(
-        loginApi: LoginApi,
-    ): LoginDatasource {
-        return LoginDatasourceImpl(
-            api = loginApi,
         )
     }
 

@@ -7,6 +7,9 @@ import dagger.hilt.components.SingletonComponent
 import gr.android.dummyjson.data.network.services.LoginApi
 import gr.android.dummyjson.data.network.services.ProductsApi
 import gr.android.dummyjson.data.network.services.interceptors.HeadersInterceptor
+import gr.android.dummyjson.data.network.services.interceptors.TokenAuthenticator
+import gr.android.dummyjson.data.network.services.interceptors.TokenService
+import gr.android.dummyjson.domain.repository.LoginRepository
 import gr.android.dummyjson.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,12 +31,22 @@ object NetworkModule {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }
+
     @Singleton
     @Provides
-    fun provideHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideTokenAuthenticator(
+        tokenService: TokenService
+    ): TokenAuthenticator {
+        return TokenAuthenticator(tokenService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, tokenAuthenticator: TokenAuthenticator): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(HeadersInterceptor())
+            .authenticator(tokenAuthenticator)
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
             .build()

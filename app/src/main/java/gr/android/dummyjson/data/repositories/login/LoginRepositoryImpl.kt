@@ -1,8 +1,10 @@
 package gr.android.dummyjson.data.repositories.login
 
 import gr.android.dummyjson.data.local.SessionPreferences
-import gr.android.dummyjson.data.network.datasources.LoginDatasource
 import gr.android.dummyjson.data.network.models.login.LoginRequest
+import gr.android.dummyjson.data.network.models.login.RefreshTokenDTO
+import gr.android.dummyjson.data.network.models.login.RefreshTokenRequest
+import gr.android.dummyjson.data.network.services.LoginApi
 import gr.android.dummyjson.domain.repository.LoginRepository
 import gr.android.dummyjson.utils.Outcome
 import kotlinx.coroutines.flow.first
@@ -10,12 +12,12 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class LoginRepositoryImpl(
-    private val datasource: LoginDatasource,
+    private val api: LoginApi,
     private val sessionPreferences: SessionPreferences
 ): LoginRepository {
     override suspend fun login(loginRequest: LoginRequest): Outcome<Unit?> {
         return try {
-            val result = datasource.loginUser(loginRequest)
+            val result = api.loginUser(loginRequest)
             if (result.accessToken?.isNotEmpty() == true ){
                 sessionPreferences.saveAccessToken(result.accessToken ?: "")
                 sessionPreferences.saveRefreshToken(result.refreshToken ?: "")
@@ -40,5 +42,10 @@ class LoginRepositoryImpl(
         } else {
             Outcome.Success(true)
         }
+    }
+
+    override suspend fun refreshToken(refreshToken: String): RefreshTokenDTO {
+        val refreshTokenRequest = RefreshTokenRequest(refreshToken)
+        return api.refreshToken(refreshTokenRequest)
     }
 }

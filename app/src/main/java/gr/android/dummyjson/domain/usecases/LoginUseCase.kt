@@ -23,7 +23,7 @@ class LoginUseCase @Inject constructor(
         val loginRequest = LoginRequest(
             username = username.trim(),
             password = password.trim(),
-            expiresInMins = "60"
+            expiresInMins = "1"
         )
 
         return flow {
