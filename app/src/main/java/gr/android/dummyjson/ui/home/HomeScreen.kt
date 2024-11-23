@@ -228,7 +228,8 @@ private fun HomeScreenContentPreview() {
         title = "Woman Printed Kurta",
         image = "",
         description = "Neque porro quisquam est qui dolorem ipsum quia",
-        price = "1500"
+        price = "1500",
+        brand = "Nike"
     )
     HomeScreenContent(
         products = flowOf(PagingData.from(listOf(product, product, product, product))),

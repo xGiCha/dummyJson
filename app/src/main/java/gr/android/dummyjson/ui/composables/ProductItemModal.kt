@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -93,7 +94,7 @@ fun ProductItemModal(
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 modifier = Modifier.fillMaxWidth().padding(4.dp),
-                text = "Category: ${product?.category.orEmpty()}",
+                text = "${stringResource(R.string.brand)} ${product?.brand.orEmpty()}",
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontSize = 10.sp,
@@ -129,7 +130,8 @@ private fun ProductItemModalPreview() {
             title = "Woman Printed Kurta",
             image = "",
             description = "Neque porro quisquam est qui dolorem ipsum quia",
-            price = "1500"
+            price = "1500",
+            brand = "Nike"
         ),
         onProductClick = {},
     )

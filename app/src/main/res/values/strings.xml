@@ -9,4 +9,5 @@
     <string name="try_again">Try again</string>
     <string name="profile_coming_soon">Profile is coming soon...</string>
     <string name="logout">Logout</string>
+    <string name="brand">Brand:</string>
 </resources>

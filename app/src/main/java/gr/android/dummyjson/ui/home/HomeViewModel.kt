@@ -56,7 +56,8 @@ class HomeViewModel @Inject constructor(
                     id = it.id ?: -1,
                     image = it.images?.firstOrNull().orEmpty(),
                     price = (it.price ?: 0.0).toString() + " €",
-                    title = it.title.orEmpty()
+                    title = it.title.orEmpty(),
+                    brand = it.brand.orEmpty(),
                 )
             }
 
