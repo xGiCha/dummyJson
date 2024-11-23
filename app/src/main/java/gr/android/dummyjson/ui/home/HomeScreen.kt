@@ -18,6 +18,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -105,6 +106,7 @@ fun HomeScreen(
                 )
             }
         }
+
         else -> {}
     }
 }
@@ -121,7 +123,7 @@ private fun HomeScreenContent(
     onHideLogout: () -> Unit,
 ) {
 
-    val lazyPagingItems = products.collectAsLazyPagingItems()
+    val lazyPagingItems = remember { products }.collectAsLazyPagingItems()
 
     LaunchedEffect(lazyPagingItems.loadState) {
         if (lazyPagingItems.loadState.refresh is LoadState.Error) {
@@ -149,7 +151,7 @@ private fun HomeScreenContent(
             TopBarModal(
                 leftIconVisibility = homeScreenInfo.toolbarInfo.toolLeftIconVisibility,
                 onRightClick = {
-                onProfileClick()
+                    onProfileClick()
                 }
             )
 
@@ -187,6 +189,7 @@ private fun HomeScreenContent(
                                 CircularProgressIndicator()
                             }
                         }
+
                         is LoadState.Error -> {
                             Button(
                                 onClick = { lazyPagingItems.retry() },
@@ -195,6 +198,7 @@ private fun HomeScreenContent(
                                 Text(text = stringResource(R.string.try_again))
                             }
                         }
+
                         else -> {}
                     }
                 }

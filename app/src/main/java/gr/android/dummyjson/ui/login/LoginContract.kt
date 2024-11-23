@@ -1,4 +1,4 @@
-package gr.android.fakestoreapi.ui.login
+package gr.android.dummyjson.ui.login
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.vector.ImageVector

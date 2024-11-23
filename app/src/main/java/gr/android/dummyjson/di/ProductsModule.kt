@@ -7,7 +7,9 @@ import dagger.hilt.components.SingletonComponent
 import gr.android.dummyjson.common.annotation.Application
 import gr.android.dummyjson.data.local.database.products.ProductsDataSource
 import gr.android.dummyjson.data.network.services.ProductsApi
+import gr.android.dummyjson.data.repositories.products.ProductDetailsRepositoryImpl
 import gr.android.dummyjson.data.repositories.products.ProductsRepositoryImpl
+import gr.android.dummyjson.domain.repository.ProductDetailsRepository
 import gr.android.dummyjson.domain.repository.ProductsRepository
 import kotlinx.coroutines.CoroutineScope
 
@@ -15,18 +17,14 @@ import kotlinx.coroutines.CoroutineScope
 @InstallIn(SingletonComponent::class)
 object ProductsModule {
 
-//    @Provides
-//    fun provideProductCategoriesRepository(
-//        productsApi: ProductsApi,
-//        productCategoriesDao: ProductCategoriesDao,
-//        @Application coroutineScope: CoroutineScope,
-//    ): ProductCategoriesRepository {
-//        return ProductCategoriesRepositoryImpl(
-//            productsApi = productsApi,
-//            productCategoriesDao = productCategoriesDao,
-//            coroutineScope = coroutineScope,
-//        )
-//    }
+    @Provides
+    fun provideProductDetailsRepository(
+        productsApi: ProductsApi,
+    ): ProductDetailsRepository {
+        return ProductDetailsRepositoryImpl(
+            productsApi = productsApi,
+        )
+    }
 
     @Provides
     fun provideProductsRepository(

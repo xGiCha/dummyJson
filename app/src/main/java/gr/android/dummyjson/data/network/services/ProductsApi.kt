@@ -16,7 +16,9 @@ interface ProductsApi {
         @Query("skip") skip: Int,
     ): ProductsDTO?
 
-    @GET("products/categories")
-    suspend fun getProductCategories(): List<String>?
+    @GET("products/{id}")
+    suspend fun getProductDetails(
+        @Path("id") productId: Int
+    ): ProductDTO?
 
 }

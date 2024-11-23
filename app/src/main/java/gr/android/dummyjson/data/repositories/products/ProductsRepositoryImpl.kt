@@ -21,16 +21,18 @@ class ProductsRepositoryImpl(
     coroutineScope: CoroutineScope,
 ) : ProductsRepository {
 
-    override val products: Flow<PagingData<ProductDomainModel>> = Pager(
-        config = PagingConfig(
-            pageSize = ProductsPagingDatasource.NETWORK_PAGE_SIZE,
-            enablePlaceholders = false,
-            initialLoadSize = ProductsPagingDatasource.NETWORK_PAGE_SIZE
-        ),
-        pagingSourceFactory = { ProductsPagingDatasource(productsApi) }
-    ).flow.cachedIn(coroutineScope).map { pagingData ->
-        pagingData.map { productDTO ->
-            productDTO.toDomain()
+    override val products: Flow<PagingData<ProductDomainModel>> by lazy {
+        Pager(
+            config = PagingConfig(
+                pageSize = ProductsPagingDatasource.NETWORK_PAGE_SIZE,
+                enablePlaceholders = false,
+                initialLoadSize = ProductsPagingDatasource.NETWORK_PAGE_SIZE
+            ),
+            pagingSourceFactory = { ProductsPagingDatasource(productsApi) }
+        ).flow.cachedIn(coroutineScope).map { pagingData ->
+            pagingData.map { productDTO ->
+                productDTO.toDomain()
+            }
         }
     }
 }

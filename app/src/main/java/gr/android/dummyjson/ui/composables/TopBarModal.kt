@@ -27,7 +27,7 @@ fun TopBarModal(
     modifier: Modifier = Modifier,
     leftIcon: Int = R.drawable.ic_left_arrow,
     middleIcon: Int = R.drawable.ic_toolbar,
-    rightIcon: Int = R.drawable.ic_profile,
+    rightIcon: Int? = R.drawable.ic_profile,
     leftIconVisibility: Boolean = true,
     middleIconVisibility: Boolean = true,
     rightIconVisibility: Boolean = true,
@@ -73,7 +73,7 @@ fun TopBarModal(
             Spacer(modifier = Modifier.weight(1f))
 
             // Right Image
-            if (rightIconVisibility) {
+            if (rightIconVisibility && rightIcon != null) {
                 Image(
                     painter = painterResource(id = rightIcon),
                     contentDescription = "Right Image",

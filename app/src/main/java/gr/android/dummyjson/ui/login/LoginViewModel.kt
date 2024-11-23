@@ -10,7 +10,6 @@ import gr.android.dummyjson.domain.usecases.LoginUseCase
 import gr.android.dummyjson.ui.BaseViewModelImpl
 import gr.android.dummyjson.ui.emitAsync
 import gr.android.dummyjson.utils.Outcome
-import gr.android.fakestoreapi.ui.login.LoginContract
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

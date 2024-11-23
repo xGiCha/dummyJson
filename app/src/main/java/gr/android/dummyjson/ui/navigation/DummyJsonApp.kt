@@ -11,16 +11,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import gr.android.dummyjson.ui.home.HomeNavigation
 import gr.android.dummyjson.ui.home.HomeScreen
 import gr.android.dummyjson.ui.login.LoginNavigation
 import gr.android.dummyjson.ui.login.LoginScreen
+import gr.android.dummyjson.ui.navigation.Screen.HomeScreen.withArgsFormat
+import gr.android.dummyjson.ui.productDetails.ProductDetailsScreen
+import gr.android.dummyjson.ui.productDetails.ProductDetailsScreenNavigation
 import gr.android.dummyjson.ui.splash.SplashNavigation
 import gr.android.dummyjson.ui.splash.SplashScreen
 
@@ -58,6 +62,7 @@ fun DummyJsonNavHost(
                     navigateToSplashScreen(navController = navController)
                     navigateToLoginScreen(navController = navController)
                     navigateToHomeScreen(navController = navController)
+                    navigateToProductDetailsScreen(navController = navController)
                 }
             }
         }
@@ -74,7 +79,7 @@ private fun NavGraphBuilder.navigateToHomeScreen(
             navigate = {
                 when(it) {
                     is HomeNavigation.NavigateToDetails -> {
-//                        navController.navigate(Screen.ProductDetailsScreen.createRoute(it.productId.toString()))
+                        navController.navigate(Screen.ProductDetailsScreen.createRoute(it.productId.toString()))
                     }
 
                     HomeNavigation.NavigateToLoginScreen -> {
@@ -119,6 +124,33 @@ private fun NavGraphBuilder.navigateToSplashScreen(
                     }
                     SplashNavigation.NavigateToHome -> {
                         goHomeAndClearBackStack(navController)
+                    }
+                }
+            }
+        )
+    }
+}
+
+private fun NavGraphBuilder.navigateToProductDetailsScreen(
+    navController: NavHostController
+) {
+    composable(
+        route = Screen.ProductDetailsScreen.route.withArgsFormat(
+            Screen.ProductDetailsScreen.ARGUMENT_PRODUCT_ID,
+        ),
+        arguments = listOf(navArgument(Screen.ProductDetailsScreen.ARGUMENT_PRODUCT_ID) {
+            type = NavType.StringType
+            nullable = false
+        })
+    ) { backStackEntry ->
+        val productId =
+            backStackEntry.arguments?.getString(Screen.ProductDetailsScreen.ARGUMENT_PRODUCT_ID)
+        ProductDetailsScreen(
+            productId = productId?.toInt(),
+            navigate = {
+                when(it) {
+                    ProductDetailsScreenNavigation.OnBack -> {
+                        navController.popBackStack()
                     }
                 }
             }

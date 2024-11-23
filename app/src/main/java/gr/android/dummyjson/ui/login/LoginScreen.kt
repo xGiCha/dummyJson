@@ -37,7 +37,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import gr.android.dummyjson.R
 import gr.android.dummyjson.ui.composables.ButtonModal
-import gr.android.fakestoreapi.ui.login.LoginContract
 
 sealed interface LoginNavigation {
     data object NavigateToHome: LoginNavigation

@@ -1,9 +1,11 @@
 package gr.android.dummyjson.ui.home
 
+import android.content.Context
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import gr.android.dummyjson.R
 import gr.android.dummyjson.domain.uiModels.ProductDomainModel
 import gr.android.dummyjson.domain.usecases.LogoutUseCase
@@ -17,6 +19,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
@@ -25,6 +28,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    @ApplicationContext appContext: Context,
     private val productsUseCase: ProductsUseCase,
     private val logoutUseCase: LogoutUseCase,
 ) : BaseViewModelImpl<HomeContract.State, HomeContract.Event>() {
@@ -53,11 +57,11 @@ class HomeViewModel @Inject constructor(
                 HomeContract.State.Data.Product(
                     category = it.category.orEmpty(),
                     description = it.description.orEmpty(),
-                    id = it.id ?: -1,
+                    id = it.id,
                     image = it.images?.firstOrNull().orEmpty(),
-                    price = (it.price ?: 0.0).toString() + " €",
+                    price = "${appContext.getString(R.string.price)} ${(it.price ?: 0.0).toString() + " €"}",
                     title = it.title.orEmpty(),
-                    brand = it.brand.orEmpty(),
+                    brand = "${appContext.getString(R.string.brand)} ${it.brand.orEmpty()}",
                 )
             }
 
@@ -138,9 +142,5 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             error.emit(errorMessage)
         }
-    }
-
-    companion object {
-        const val All_ITEMS = "All"
     }
 }

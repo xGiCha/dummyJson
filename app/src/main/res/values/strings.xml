@@ -10,4 +10,15 @@
     <string name="profile_coming_soon">Profile is coming soon...</string>
     <string name="logout">Logout</string>
     <string name="brand">Brand:</string>
+    <string name="product_details_title">Product Details</string>
+    <string name="read_more">Read More</string>
+    <string name="category">Category: </string>
+    <string name="price">Price: </string>
+    <string name="reviews">Reviews</string>
+    <string name="reviewer">Reviewer:</string>
+    <string name="rating">Rating:</string>
+    <string name="date">Date:</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="no_comments">No comments available.</string>
+    <string name="no_date">No date provided</string>
 </resources>

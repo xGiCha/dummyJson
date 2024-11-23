@@ -94,7 +94,7 @@ fun ProductItemModal(
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 modifier = Modifier.fillMaxWidth().padding(4.dp),
-                text = "${stringResource(R.string.brand)} ${product?.brand.orEmpty()}",
+                text = product?.brand.orEmpty(),
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontSize = 10.sp,
@@ -105,7 +105,7 @@ fun ProductItemModal(
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 modifier = Modifier.fillMaxWidth().padding(4.dp),
-                text = "Price: ${product?.price.orEmpty()}",
+                text = product?.price.orEmpty(),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 fontSize = 16.sp,
