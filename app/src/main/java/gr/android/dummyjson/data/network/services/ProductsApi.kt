@@ -7,17 +7,16 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ProductsApi {
     @GET("products")
-    suspend fun getProducts(): List<ProductsDTO>?
+    suspend fun getProducts(
+        @Query("limit") limit: Int,
+        @Query("skip") skip: Int,
+    ): ProductsDTO?
 
     @GET("products/categories")
     suspend fun getProductCategories(): List<String>?
 
-    @PUT("products/{id}")
-    suspend fun updateProduct(
-        @Path("id") id: Int,
-        @Body productUpdateRequestDTO: ProductUpdateRequestDTO
-    ): ProductDTO?
 }

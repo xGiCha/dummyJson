@@ -121,6 +121,11 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.accompanist.drawablepainter)
 
+    // Paging
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.runtime.ktx)
+
 
     //test
     testImplementation(libs.mockk)

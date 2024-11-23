@@ -42,7 +42,7 @@ fun DummyJsonNavHost(
                 .fillMaxSize()
                 .padding(
                     PaddingValues(
-                        top = 0.dp,
+                        top = insets.calculateTopPadding(),
                         bottom = insets.calculateBottomPadding(),
                         start = insets.calculateStartPadding(LocalLayoutDirection.current),
                         end = insets.calculateEndPadding(LocalLayoutDirection.current)
