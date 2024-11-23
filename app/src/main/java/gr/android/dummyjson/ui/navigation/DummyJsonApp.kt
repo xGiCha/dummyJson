@@ -17,6 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import gr.android.dummyjson.ui.home.HomeNavigation
 import gr.android.dummyjson.ui.home.HomeScreen
 import gr.android.dummyjson.ui.login.LoginNavigation
 import gr.android.dummyjson.ui.login.LoginScreen
@@ -70,19 +71,19 @@ private fun NavGraphBuilder.navigateToHomeScreen(
 ) {
     composable(route = Screen.HomeScreen.route.value) {
         HomeScreen(
-//            navigate = {
-//                when(it) {
-//                    is HomeNavigation.NavigateToDetails -> {
+            navigate = {
+                when(it) {
+                    is HomeNavigation.NavigateToDetails -> {
 //                        navController.navigate(Screen.ProductDetailsScreen.createRoute(it.productId.toString()))
-//                    }
-//
-//                    HomeNavigation.NavigateToLoginScreen -> {
-//                        navController.navigate(Screen.LoginScreen.route.value) {
-//                            popUpTo(0) { inclusive = true }
-//                        }
-//                    }
-//                }
-//            }
+                    }
+
+                    HomeNavigation.NavigateToLoginScreen -> {
+                        navController.navigate(Screen.LoginScreen.route.value) {
+                            popUpTo(0) { inclusive = true }
+                        }
+                    }
+                }
+            }
         )
     }
 }

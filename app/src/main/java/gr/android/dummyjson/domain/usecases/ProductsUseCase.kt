@@ -10,7 +10,7 @@ import javax.inject.Inject
 class ProductsUseCase @Inject constructor(
     private val productsRepository: ProductsRepository
 ) {
-    operator fun invoke(): Flow<Outcome<PagingData<ProductDomainModel>>> {
+    operator fun invoke(): Flow<PagingData<ProductDomainModel>> {
         return productsRepository.products
     }
 }

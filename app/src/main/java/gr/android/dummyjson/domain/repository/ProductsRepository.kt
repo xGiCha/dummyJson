@@ -6,5 +6,5 @@ import gr.android.dummyjson.utils.Outcome
 import kotlinx.coroutines.flow.Flow
 
 interface ProductsRepository {
-    val products: Flow<Outcome<PagingData<ProductDomainModel>>>
+    val products: Flow<PagingData<ProductDomainModel>>
 }

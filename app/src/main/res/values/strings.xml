@@ -5,4 +5,8 @@
     <string name="user_name_field">Username or Email</string>
     <string name="password_field">Password</string>
     <string name="login_btn_text">Login</string>
+    <string name="ok">OK</string>
+    <string name="try_again">Try again</string>
+    <string name="profile_coming_soon">Profile is coming soon...</string>
+    <string name="logout">Logout</string>
 </resources>
