@@ -3,9 +3,7 @@ package gr.android.dummyjson.data.network
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import gr.android.dummyjson.data.network.models.products.ProductDTO
-import gr.android.dummyjson.data.network.models.products.ProductsDTO
 import gr.android.dummyjson.data.network.services.ProductsApi
-import gr.android.dummyjson.utils.Outcome
 import retrofit2.HttpException
 import java.io.IOException
 
