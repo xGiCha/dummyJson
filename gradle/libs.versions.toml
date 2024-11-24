@@ -38,7 +38,8 @@ datastoreCoreAndroid = "1.1.1"
 flowCombinetupleKt = "1.3.0"
 pagingRunTime = "3.3.4"
 pagingRunTimeKtx = "3.2.1"
-pagingCompose = "3.3.0-alpha04"
+pagingCompose = "3.3.4"
+pagingRoom = "2.5.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -94,6 +95,7 @@ flow-combinetuple-kt = { module = "com.github.Zhuinden:flow-combinetuple-kt", ve
 paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRunTimeKtx" }
 paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRunTime" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
+paging-room = { module = "androidx.room:room-paging", version.ref = "pagingRoom" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

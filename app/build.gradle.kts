@@ -125,6 +125,7 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
     implementation(libs.paging.runtime.ktx)
+    implementation(libs.paging.room)
 
 
     //test

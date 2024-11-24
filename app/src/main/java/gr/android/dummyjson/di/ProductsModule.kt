@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import gr.android.dummyjson.common.annotation.Application
+import gr.android.dummyjson.data.local.database.DummyJsonDatabase
 import gr.android.dummyjson.data.local.database.products.ProductsDataSource
 import gr.android.dummyjson.data.network.services.ProductsApi
 import gr.android.dummyjson.data.repositories.products.ProductDetailsRepositoryImpl
@@ -29,7 +30,7 @@ object ProductsModule {
     @Provides
     fun provideProductsRepository(
         productsApi: ProductsApi,
-        productsDataSource: ProductsDataSource,
+        productsDataSource: DummyJsonDatabase,
         @Application coroutineScope: CoroutineScope,
     ): ProductsRepository {
         return ProductsRepositoryImpl(

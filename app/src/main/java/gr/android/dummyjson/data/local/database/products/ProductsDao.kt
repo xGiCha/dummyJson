@@ -1,5 +1,6 @@
 package gr.android.dummyjson.data.local.database.products
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,8 +14,11 @@ interface ProductsDao {
     suspend fun clearTable()
 
     @Query("SELECT * FROM products_table")
-    fun getAllProducts(): Flow<List<ProductEntity>>
+    fun getAllProducts(): PagingSource<Int, ProductEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct(productEntity: ProductEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProducts(products: List<ProductEntity>)
 }
