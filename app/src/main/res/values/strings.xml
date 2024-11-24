@@ -12,8 +12,8 @@
     <string name="brand">Brand:</string>
     <string name="product_details_title">Product Details</string>
     <string name="read_more">Read More</string>
-    <string name="category">Category: </string>
-    <string name="price">Price: </string>
+    <string name="category">Category:</string>
+    <string name="price">Price:</string>
     <string name="reviews">Reviews</string>
     <string name="reviewer">Reviewer:</string>
     <string name="rating">Rating:</string>

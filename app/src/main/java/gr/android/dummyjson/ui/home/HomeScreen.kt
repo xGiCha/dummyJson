@@ -256,7 +256,6 @@ private fun HomeScreenContentPreview() {
     HomeScreenContent(
         products = flowOf(PagingData.from(listOf(product, product, product, product))),
         homeScreenInfo = HomeContract.State.Data.HomeScreenInfo(
-            allFeaturedTitle = "All Featured",
             toolbarInfo = HomeContract.State.Data.HomeScreenInfo.ToolBarInfo(
                 toolbarLeftIcon = R.drawable.ic_left_arrow,
                 toolMiddleIcon = R.drawable.ic_toolbar,

@@ -67,7 +67,6 @@ class HomeViewModel @Inject constructor(
 
             HomeContract.State.Data(
                 homeScreenInfo = HomeScreenInfo(
-                    allFeaturedTitle = "All Featured",
                     toolbarInfo = HomeScreenInfo.ToolBarInfo(
                         toolbarLeftIcon = R.drawable.ic_left_arrow,
                         toolMiddleIcon = R.drawable.ic_toolbar,

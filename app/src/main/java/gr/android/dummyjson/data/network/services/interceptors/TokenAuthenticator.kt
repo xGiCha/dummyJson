@@ -1,17 +1,10 @@
 package gr.android.dummyjson.data.network.services.interceptors
 
-import gr.android.dummyjson.data.local.SessionPreferences
-import gr.android.dummyjson.data.network.services.LoginApi
-import gr.android.dummyjson.utils.Constants.BASE_URL
+import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
-import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class TokenAuthenticator(
     private val tokenService: TokenService // Inject TokenService here

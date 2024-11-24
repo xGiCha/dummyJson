@@ -24,7 +24,6 @@ interface HomeContract {
             val showLogout: Boolean,
         ): State {
             data class HomeScreenInfo(
-                val allFeaturedTitle: String,
                 val toolbarInfo: ToolBarInfo,
             ) {
                 data class ToolBarInfo(
