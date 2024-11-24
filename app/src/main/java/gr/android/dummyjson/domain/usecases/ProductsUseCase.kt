@@ -12,4 +12,8 @@ class ProductsUseCase @Inject constructor(
     fun invoke(): Flow<PagingData<ProductDomainModel>> {
         return productsRepository.products
     }
+
+    fun refreshProducts() {
+        productsRepository.refreshProducts()
+    }
 }

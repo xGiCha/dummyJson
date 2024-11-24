@@ -21,6 +21,8 @@ class ProductsRepositoryImpl(
     coroutineScope: CoroutineScope,
 ) : ProductsRepository {
 
+    private var currentPagingSource: ProductsPagingDatasource? = null
+
     override val products: Flow<PagingData<ProductDomainModel>> by lazy {
         Pager(
             config = PagingConfig(
@@ -28,11 +30,17 @@ class ProductsRepositoryImpl(
                 enablePlaceholders = false,
                 initialLoadSize = ProductsPagingDatasource.NETWORK_PAGE_SIZE
             ),
-            pagingSourceFactory = { ProductsPagingDatasource(productsApi) }
+            pagingSourceFactory = { ProductsPagingDatasource(productsApi).apply {
+                currentPagingSource = this
+            } }
         ).flow.cachedIn(coroutineScope).map { pagingData ->
             pagingData.map { productDTO ->
                 productDTO.toDomain()
             }
         }
+    }
+
+    override fun refreshProducts() {
+        currentPagingSource?.invalidate()
     }
 }

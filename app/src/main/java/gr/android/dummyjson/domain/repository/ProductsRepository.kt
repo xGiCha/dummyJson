@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductsRepository {
     val products: Flow<PagingData<ProductDomainModel>>
+
+    fun refreshProducts()
 }

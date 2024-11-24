@@ -40,11 +40,11 @@ class HomeViewModel @Inject constructor(
     private val _showLogout = MutableStateFlow<Boolean?>(null)
 
     init {
-        refresh()
+        getProducts()
     }
 
     fun refresh() {
-        getProducts()
+        productsUseCase.refreshProducts()
     }
 
     private val result: StateFlow<HomeContract.State?> =

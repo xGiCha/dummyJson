@@ -83,6 +83,7 @@ fun ProductDetailsScreen(
             ) {
                 SmallMessageModal(
                     errorMessage = state.value,
+                    buttonText = stringResource(R.string.try_again),
                     onClick = {
                         productDetailsViewModel.getProduct(productId = productId ?: -1)
                     },

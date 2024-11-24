@@ -21,9 +21,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
@@ -100,6 +103,7 @@ fun HomeScreen(
             ) {
                 SmallMessageModal(
                     errorMessage = state.value,
+                    buttonText = stringResource(R.string.try_again),
                     onClick = {
                         viewModel.refresh()
                     },
@@ -191,11 +195,25 @@ private fun HomeScreenContent(
                         }
 
                         is LoadState.Error -> {
-                            Button(
-                                onClick = { lazyPagingItems.retry() },
-                                modifier = Modifier.align(Alignment.CenterHorizontally)
+                            val error = (lazyPagingItems.loadState.append as LoadState.Error).error
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                Text(text = stringResource(R.string.try_again))
+                                Text(
+                                    modifier = Modifier.padding(top = 12.dp),
+                                    text = error.message.orEmpty(),
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    color = Color.Black
+                                )
+                                Spacer(modifier = Modifier.height(6.dp))
+                                Button(
+                                    onClick = { lazyPagingItems.retry() },
+                                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                                ) {
+                                    Text(text = stringResource(R.string.try_again))
+                                }
                             }
                         }
 
