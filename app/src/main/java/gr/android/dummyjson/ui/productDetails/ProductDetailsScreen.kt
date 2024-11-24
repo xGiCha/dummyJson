@@ -1,6 +1,7 @@
 package gr.android.dummyjson.ui.productDetails
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -31,6 +33,7 @@ import gr.android.dummyjson.R
 import gr.android.dummyjson.ui.composables.CarouseItemModal
 import gr.android.dummyjson.ui.composables.CarouselModal
 import gr.android.dummyjson.ui.composables.ReviewList
+import gr.android.dummyjson.ui.composables.SmallMessageModal
 import gr.android.dummyjson.ui.composables.TopBarModal
 import gr.android.dummyjson.ui.productDetails.ProductDetailsContract.State.Data.Product.Review
 import gr.android.dummyjson.ui.productDetails.ProductDetailsContract.State.Data.ProductDetailsScreenInfo
@@ -72,10 +75,21 @@ fun ProductDetailsScreen(
             )
         }
 
-        is ProductDetailsContract.State.Loading -> {}
-        else -> {
-
+        is ProductDetailsContract.State.Error -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                SmallMessageModal(
+                    errorMessage = state.value,
+                    onClick = {
+                        productDetailsViewModel.getProduct(productId = productId ?: -1)
+                    },
+                )
+            }
         }
+        else -> {}
     }
 }
 
@@ -86,7 +100,7 @@ fun ProductDetailsScreenContent(
     navigate: (ProductDetailsScreenNavigation) -> Unit,
 ) {
     val isExpanded = remember { mutableStateOf(false) }
-    var showReadMore = remember { mutableStateOf(false) }
+    val showReadMore = remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
