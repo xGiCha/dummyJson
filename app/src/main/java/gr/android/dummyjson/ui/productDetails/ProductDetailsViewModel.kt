@@ -88,7 +88,7 @@ class ProductDetailsViewModel @Inject constructor(
             } else if (isLoading) {
                 ProductDetailsContract.State.Loading
             } else {
-                result ?: ProductDetailsContract.State.Error("No info retrieved")
+                result
             }
             lastState.value = response
             response

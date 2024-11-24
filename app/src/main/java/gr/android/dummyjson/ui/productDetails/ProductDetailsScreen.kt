@@ -32,6 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import gr.android.dummyjson.R
 import gr.android.dummyjson.ui.composables.CarouseItemModal
 import gr.android.dummyjson.ui.composables.CarouselModal
+import gr.android.dummyjson.ui.composables.ConditionalText
 import gr.android.dummyjson.ui.composables.ReviewList
 import gr.android.dummyjson.ui.composables.SmallMessageModal
 import gr.android.dummyjson.ui.composables.TopBarModal
@@ -172,32 +173,33 @@ fun ProductDetailsScreenContent(
                 color = Color.Black
             )
 
-            Column(modifier = Modifier.padding(top = 10.dp)) {
-                Text(
-                    text = product?.description.orEmpty(),
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
-                    maxLines = if (isExpanded.value) Int.MAX_VALUE else 3,
-                    overflow = TextOverflow.Ellipsis,
-                    onTextLayout = { textLayoutResult: TextLayoutResult ->
-                        // Check if the text exceeds 2 lines when collapsed
-                        showReadMore.value = textLayoutResult.lineCount > 2
-                    }
-                )
-
-                if (showReadMore.value && !isExpanded.value && product?.description?.isNotEmpty() == true) {
-                    Text(
-                        text = stringResource(R.string.read_more),
-                        color = Color.Blue,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier
-                            .padding(top = 4.dp)
-                            .clickable { isExpanded.value = !isExpanded.value }
-                    )
-                }
-            }
+            ConditionalText(product?.description.orEmpty())
+//            Column(modifier = Modifier.padding(top = 10.dp)) {
+//                Text(
+//                    text = product?.description.orEmpty(),
+//                    fontSize = 12.sp,
+//                    fontWeight = FontWeight.Normal,
+//                    color = Color.Black,
+//                    maxLines = if (isExpanded.value) Int.MAX_VALUE else 3,
+//                    overflow = TextOverflow.Ellipsis,
+//                    onTextLayout = { textLayoutResult: TextLayoutResult ->
+//                        // Check if the text exceeds 2 lines when collapsed
+//                        showReadMore.value = (product?.description?.length ?: 0) > 150
+//                    }
+//                )
+//
+//                if (showReadMore.value && !isExpanded.value && product?.description?.isNotEmpty() == true) {
+//                    Text(
+//                        text = stringResource(R.string.read_more),
+//                        color = Color.Blue,
+//                        fontSize = 12.sp,
+//                        fontWeight = FontWeight.Bold,
+//                        modifier = Modifier
+//                            .padding(top = 4.dp)
+//                            .clickable { isExpanded.value = !isExpanded.value }
+//                    )
+//                }
+//            }
 
             Spacer(
                 modifier = Modifier
